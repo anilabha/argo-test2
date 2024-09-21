@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app-of-apps
+spec:
+  destination:
+    name: ''
+    namespace: app1
+    server: https://kubernetes.default.svc
+  source:
+    path: app-of-apps
+    repoURL: https://github.com/anilabha/argo-test2.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
