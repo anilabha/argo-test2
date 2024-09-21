@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app-of-apps
+spec:
+  destination:
+    name: ''
+    namespace: app2
+    server: https://kubernetes.default.svc
+  source:
+    path: helloworld-minikube-demo
+    repoURL: https://github.com/anilabhabaral/argocd-app.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
